@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url('https://media2.giphy.com/media/xTiTniuHdUjpOlNo1q/200w.webp?cid=ecf05e47hbuc1heph80ffygxhf7cl9rbwuduehtqcf3ebq09&ep=v1_gifs_search&rid=200w.webp&ct=g');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+
+    }
+
+    #todo-container {
+      width: 400px;
+      background-color: #fff;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ecf0f1;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 15px; /* Increased padding for description */
+    }
+
+    button {
+      background-color: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #3498db;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="todo-container">
+  <h2>To-Do List</h2>
+  <form id="taskForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" required></textarea>
+
+    <input type="submit" value="Add Task">
+  </form>
+
+  <ul id="taskList"></ul>
+</div>
+
+<script>
+  document.getElementById('taskForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var taskList = document.getElementById('taskList');
+    var title = document.getElementById('title').value;
+    var description = document.getElementById('description').value;
+
+    if (title.trim() && description.trim()) {
+      var li = document.createElement('li');
+      li.innerHTML = '<h3>' + title + '</h3><p>' + description + '</p><button onclick="removeTask(this)">Delete</button>';
+      taskList.appendChild(li);
+
+      // Clear input fields after adding task
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+    }
+  });
+
+  function removeTask(button) {
+    var li = button.parentNode;
+    li.parentNode.removeChild(li);
+  }
+</script>
+
+</body>
+</html>
